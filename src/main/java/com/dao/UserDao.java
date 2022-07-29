@@ -24,4 +24,8 @@ public class UserDao {
 	public List<UserBean> getAllUsers(){
 		return stmt.query("select * from users", new BeanPropertyRowMapper<UserBean>(UserBean.class));
 	}
+	
+	public void deleteUser(int userId) {
+		stmt.update("delete from users where userid =?",userId);
+	}
 }
