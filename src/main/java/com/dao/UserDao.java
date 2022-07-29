@@ -34,4 +34,19 @@ public class UserDao {
 				userBean.getFirstName(), userBean.getLastName(), userBean.getEmail(), userBean.getPassword(),
 				userBean.getGender(), userBean.getUserType(), userBean.getUserId());
 	}
+
+	public UserBean getDataByEmail(String email) {
+		List<UserBean> user = null;
+		try {
+			user = stmt.query("select * from users where email =?",
+					new BeanPropertyRowMapper<UserBean>(UserBean.class), new Object[]{email});
+		} catch (Exception e) {
+			System.out.println("Error in UserDao -> GetDataByEmail()");
+		}
+		if(user.size()==0) {
+			return null;
+		}else {
+			return user.get(0);
+		}
+	}
 }
